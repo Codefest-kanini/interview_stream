@@ -34,3 +34,18 @@ button {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
 }
+.globalbg-card{
+  background: url('https://i.postimg.cc/VvdVRSKH/diego-carneiro-T32ar-R8me-Lo-unsplash.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.container-dev{
+  display:'flex';
+  flex-direction:'row';
+  justify-content:space-between;
+  width:'100vw';
+  height:'100vh';
+   color:'white'
+}

@@ -22,7 +22,7 @@ export default function Tile({ id, isScreenShare, isLocal, isAlone }) {
 
   return (
     <div className={containerCssClasses}>
-      <DailyVideo automirror sessionId={id} type={isScreenShare ? 'screenVideo' : 'video'} />
+      <DailyVideo automirror sessionId={id} type={isScreenShare ? 'screenVideo' : 'video'} style={{border:'1px', borderRadius:'8px' }} />
       {!isScreenShare && <Username id={id} isLocal={isLocal} />}
     </div>
   );
