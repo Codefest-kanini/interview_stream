@@ -1,18 +1,21 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { AuthContext } from './context/index';
 import supabase from "./supabase.config";
 import Screen from "./assets/samplescreen.png"
 import Logo from "./assets/logo.png"
+import WebcamComponent from "./components/Camera/Camera";
+import AudioRecorder from "./components/AudioRecorder/AudioRecorder";
 
 export default function Auth() {
     const { setIsLoggedIn } = useContext(AuthContext);
-    const [signUp, setSignUp] = useState(false);
+    const [signUp, setSignUp] = useState(true);
 
     const [email, setEmail] = useState('')
     const [name, setName] = useState('')
     const [company, setCompany] = useState('')
     const [password, setPassword] = useState('')
-    
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const dialogRef = useRef();
 
 
     const signUpUser = async() => {
@@ -34,17 +37,28 @@ export default function Auth() {
 
     const signInUser = async() => {
         console.log(name,company)
-        const { data, error } = await supabase.auth.signInWithPassword({
+        return supabase.auth.signInWithPassword({
             email,
             password,
         })
 
-        alert(JSON.stringify(data))
         
-        if(data && !error) {
-            setIsLoggedIn(true);
+    }
+
+    const checkUser = async() => {
+        setDialogOpen(true);
+
+    }
+
+    const signInProcedure = async() => {
+        const { data, error } = await signInUser();
+
+        alert(JSON.stringify(data));
+    
+        if (data && !error) {
+            await checkUser();
+             // Update isLoggedIn state when user is successfully signed in
         }
-        
     }
     
 
@@ -69,7 +83,7 @@ export default function Auth() {
                             <input type="password" placeholder="Password" style={{width:'100%', fontFamily:'monospace', padding:'12px', borderRadius:'4px'}} onChange={(e) => setPassword(e.target.value)} />
                         </div>
                     </form>
-                    <button type="button" style={{background:'#1029C5', color:'#f0f0f0', marginBottom:'2px'}} onClick={() => signInUser()}>Sign In</button>
+                    <button type="button" style={{background:'#1029C5', color:'#f0f0f0', marginBottom:'2px'}} onClick={() => signInProcedure()}>Sign In</button>
                     <button type="button" style={{background:'transparent', border:'1px solid', borderColor:'black', color:'#090909', marginTop:'4px'}} onClick={() => setSignUp(false)}>Click here to Sign Up instead</button>
                 </div>
             ) : (
@@ -105,6 +119,12 @@ export default function Auth() {
             <div style={{width:'100%', display:'flex',flexDirection:'row', alignItems:'center', justifyContent:'center'}}>
                 <img src={Screen} alt="meet asset" style={{width:'auto', height:'700px'}}/>
             </div>
+            <dialog open={dialogOpen} ref={dialogRef} style={{zIndex:'10',position:'absolute',top:'25%', right:'0%', maxHeight:'70vh', alignItems:'center', overflow:'auto', display:'flex', flexDirection:'column'}}>
+                <WebcamComponent />
+                <br/>
+                <AudioRecorder />
+                <button type="button" onClick={() => { setDialogOpen(false); setIsLoggedIn(true); }}>Close</button>
+            </dialog>
         </div>
     )
 }
