@@ -63,7 +63,7 @@ export default function Chat({ showChat, toggleChat }) {
   };
 
   return showChat ? (
-    <aside className="chat">
+    <aside className="chat" style={{background:'#090909', color:'#fff'}}>
       <button onClick={toggleChat} className="close-chat" type="button">
         Close chat
       </button>
@@ -83,8 +83,9 @@ export default function Chat({ showChat, toggleChat }) {
             placeholder="Type your message here.."
             value={inputValue}
             onChange={handleChange}
+            style={{color:'#fff'}}
           />
-          <button type="submit" className="chat-submit-button">
+          <button type="submit" className="chat-submit-button" style={{color:'white'}}>
             <Arrow />
           </button>
         </form>

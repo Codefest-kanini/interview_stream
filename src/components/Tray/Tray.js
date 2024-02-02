@@ -72,7 +72,7 @@ export default function Tray({ leaveCall }) {
   };
 
   return (
-    <div className="tray">
+    <div className="tray" style={{background:'#090909'}}>
       {showMeetingInformation && <MeetingInformation />}
       {/*  The chat messages 'live' in the <Chat/> component's state. We can't just remove the component */}
       {/*  from the DOM when hiding the chat, because that would cause us to lose that state. So we're */}
@@ -84,32 +84,32 @@ export default function Tray({ leaveCall }) {
       <Chat showChat={showChat} toggleChat={toggleChat} />
       <div className="tray-buttons-container">
         <div className="controls">
-          <button onClick={toggleVideo} type="button">
+          <button onClick={toggleVideo} type="button" style={{padding:'0', background:'#5E5E5E', color: 'white'}}>
             {mutedVideo ? <CameraOff /> : <CameraOn />}
-            {mutedVideo ? 'Turn camera on' : 'Turn camera off'}
+            {/* {mutedVideo ? 'Turn camera on' : 'Turn camera off'} */}
           </button>
-          <button onClick={toggleAudio} type="button">
+          <button onClick={toggleAudio} type="button" style={{padding:'0', background:'#5E5E5E', color: 'white'}}>
             {mutedAudio ? <MicrophoneOff /> : <MicrophoneOn />}
-            {mutedAudio ? 'Unmute mic' : 'Mute mic'}
+            {/* {mutedAudio ? 'Unmute mic' : 'Mute mic'} */}
           </button>
         </div>
         <div className="actions">
-          <button onClick={toggleScreenShare} type="button">
+          <button onClick={toggleScreenShare} type="button" style={{padding:'0', background:'#5E5E5E', color: 'white'}}>
             <Screenshare />
-            {isSharingScreen ? 'Stop sharing screen' : 'Share screen'}
+            {/* {isSharingScreen ? 'Stop sharing screen' : 'Share screen'} */}
           </button>
-          <button onClick={toggleMeetingInformation} type="button">
+          <button onClick={toggleMeetingInformation} type="button" style={{padding:'0', background:'#5E5E5E', color: 'white'}}>
             <Info />
-            {showMeetingInformation ? 'Hide info' : 'Show info'}
+            {/* {showMeetingInformation ? 'Hide info' : 'Show info'} */}
           </button>
-          <button onClick={toggleChat} type="button">
+          <button onClick={toggleChat} type="button" style={{padding:'0', background:'#5E5E5E', color: 'white'}}>
             {newChatMessage ? <ChatHighlighted /> : <ChatIcon />}
-            {showChat ? 'Hide chat' : 'Show chat'}
+            {/* {showChat ? 'Hide chat' : 'Show chat'} */}
           </button>
         </div>
         <div className="leave">
-          <button onClick={leaveCall} type="button">
-            <Leave /> Leave call
+          <button onClick={leaveCall} type="button" style={{padding:'0', background:'#5E5E5E', color: 'white'}}>
+            <Leave /> 
           </button>
         </div>
       </div>

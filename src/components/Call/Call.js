@@ -31,6 +31,22 @@ export default function Call() {
   const localSessionId = useLocalSessionId();
   const isAlone = remoteParticipantIds.length < 1 || screens.length < 1;
 
+  const sharelink = async () => {
+    if (navigator.share) {
+        try {
+            await navigator.share({
+                title: 'Join my video call',
+                url: window.location.href
+            });
+            console.log('Successfully shared');
+        } catch (error) {
+            console.log('Error sharing', error);
+        }
+    } else {
+        console.log('Web Share API is not supported in your browser');
+    }
+}
+
   const renderCallScreen = () => (
     <div className={screens.length > 0 ? 'is-screenshare' : 'call'}>
       {/* Your self view */}
@@ -54,9 +70,12 @@ export default function Call() {
       ) : (
         // When there are no remote participants or screen shares
         <div className="info-box">
-          <h1>Waiting for others</h1>
+          <h1>Waiting for others?</h1>
           <p>Invite someone by sharing this link:</p>
           <span className="room-url">{window.location.href}</span>
+          <button onClick={sharelink} type="button">
+            Share link
+          </button>
         </div>
       )}
     </div>
